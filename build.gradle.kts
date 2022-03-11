@@ -8,7 +8,7 @@ plugins {
 }
 
 group = "com.example"
-version = "0.0.1"
+version = "0.0.2"
 application {
     mainClass.set("com.example.ApplicationKt")
 }
@@ -21,6 +21,7 @@ dependencies {
     implementation("io.ktor:ktor-server-core:$ktor_version")
     implementation("io.ktor:ktor-gson:$ktor_version")
     implementation("io.ktor:ktor-server-netty:$ktor_version")
+    implementation ("io.ktor:ktor-serialization:$ktor_version")
     implementation("ch.qos.logback:logback-classic:$logback_version")
     testImplementation("io.ktor:ktor-server-tests:$ktor_version")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")

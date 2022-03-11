@@ -1,6 +1,7 @@
 package com.example.plugins
 
 import com.example.model.User
+import com.example.model.UserStatus
 import io.ktor.routing.*
 import io.ktor.http.*
 import io.ktor.application.*
@@ -9,7 +10,7 @@ import io.ktor.request.*
 
 fun Application.configureRouting() {
 
-    var users = mutableListOf<User>()
+    val users = mutableListOf<User>()
 
     routing {
         get("/") {
@@ -18,10 +19,16 @@ fun Application.configureRouting() {
 
         get("/api/") {
             call.respondText("Hello Platon!")
+            users.add(User(call.request.queryParameters["user"].toString(), UserStatus.ONLINE))
+            if (users.size == 2) {
+                call.respondText("Нанчинаем игру!")
+            }
         }
         post("/api/") {
-            val customer = call.receive<User>()
-            users.add(customer)
+//            call.respondText("!!!!!!!!!")
+//            val customer = call.receive<User>()
+//            users.add(customer)
+            val formParameters = call.receiveParameters()
             call.respondText("Customer stored correctly", status = HttpStatusCode.Created)
         }
     }
